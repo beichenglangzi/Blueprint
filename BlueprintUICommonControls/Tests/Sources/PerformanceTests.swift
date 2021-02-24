@@ -1,5 +1,5 @@
 //
-//  PerformancePlayground.swift
+//  PerformanceTests.swift
 //  BlueprintUI-Unit-Tests
 //
 //  Created by Kyle Van Essen on 6/23/20.
@@ -10,33 +10,16 @@ import BlueprintUI
 @testable import BlueprintUICommonControls
 
 
-class PerformancePlayground : XCTestCase
+class PerformanceTests : XCTestCase
 {
     override func invokeTest() {
         // Uncomment this line to run performance metrics, eg in Instruments.app.
         super.invokeTest()
     }
     
-    func test_deep_proxy_elements() {
-        
-    }
-    
-    func test_repeated_layouts() {
-        
-        let view = BlueprintView(frame: CGRect(x: 0.0, y: 0.0, width: 200.0, height: 500.0))
-        
-        self.determineAverage {
-            let element = Column { col in
-                for index in 1...1000 {
-                    col.add(child: Label(text: "This is test label number #\(index)"))
-                }
-            }
-            
-            
-            view.element = element
-            view.layoutIfNeeded()
-        }
-    }
+//    func test_deep_proxy_elements() {
+//
+//    }
     
     func test_deep_element_hierarchy() {
                 
@@ -73,6 +56,23 @@ class PerformancePlayground : XCTestCase
             }
             
             view.element = stack
+            view.layoutIfNeeded()
+        }
+    }
+    
+    func test_repeated_layouts() {
+        
+        let view = BlueprintView(frame: CGRect(x: 0.0, y: 0.0, width: 200.0, height: 500.0))
+        
+        self.determineAverage {
+            let element = Column { col in
+                for index in 1...1000 {
+                    col.add(child: Label(text: "This is test label number #\(index)"))
+                }
+            }
+            
+            
+            view.element = element
             view.layoutIfNeeded()
         }
     }
